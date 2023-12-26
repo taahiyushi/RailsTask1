@@ -1,0 +1,13 @@
+<h1>スケジュール詳細</h1>
+
+<p><strong>タイトル:</strong> <%= @schedule.title %></p>
+<p><strong>開始日:</strong> <%= @schedule.start_date.strftime('%Y/%m/%d') %></p>
+<p><strong>終了日:</strong> <%= @schedule.end_date.strftime('%Y/%m/%d') %></p>
+<p><strong>終日:</strong> <%= @schedule.all_day? ? '終日' : '一部の日' %></p>
+<p><strong>メモ:</strong> <%= @schedule.memo %></p>
+<p><strong>更新日時:</strong> <%= @schedule.updated_at.strftime('%Y/%m/%d %H:%M') %></p>
+
+<%= link_to '編集', edit_schedule_path(@schedule) %>     
+<%= link_to '戻る', schedules_path %>     
+<%= link_to '削除', schedule_path(@schedule), method: :delete, data: { confirm: '本当に削除しますか？' } %>   
+

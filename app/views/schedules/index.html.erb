@@ -1,0 +1,39 @@
+<h1>スケジュール一覧</h1>
+
+<p>総スケジュール数: <%= @total_schedules %></p>     <%# indexアクションで定義された変数を表示している %>
+<p>今日の日付: <%= @today.strftime('%Y/%m/%d') %></p>     
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>更新日時</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schedules.each do |schedule| %>     <%# @schedules内の配列のデータを繰り返し処理で表示していく %>
+      <tr>
+        <td><%= schedule.id %></td>
+        <td><%= schedule.title %></td>
+        <td><%= schedule.start_date.strftime('%Y/%m/%d') %></td>
+        <td><%= schedule.end_date.strftime('%Y/%m/%d') %></td>
+        <td><%= schedule.all_day? ? '○' : '' %></td>
+        <td><%= schedule.updated_at.strftime('%Y/%m/%d %H:%M') %></td>
+        <td>
+          <%= link_to '詳細', schedule_path(schedule) %>     <%# schedule のidが1の場合、schedule_path(schedule) は /schedules/1 となる %>
+          <%= link_to '編集', edit_schedule_path(schedule) %>     <%# 指定中のscheduleの編集ページに飛ぶ %>
+          <%= link_to '削除', schedule_path(schedule), method: :delete, data: { confirm: '本当に削除しますか？' } %>     <%# 指定中のscheduleをdeleteメソッドで削除する。その際confirmでユーザーに確認 %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新しいスケジュール', new_schedule_path %>     <%# 新規メモページに飛ぶ %>
+
+
