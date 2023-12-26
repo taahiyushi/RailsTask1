@@ -1,0 +1,5 @@
+<h1>スケジュールの更新</h1>
+
+<%= render 'form', schedule: @schedule %>     <%# 部分テンプレートにて_form.html.erbが表記される。また@scheduleをインスタンス変数として渡している %>
+
+<%= link_to 'Back', schedules_path, class: 'btn btn-secondary' %>

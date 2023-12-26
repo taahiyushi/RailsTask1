@@ -1,0 +1,41 @@
+<%= form_with(model: schedule, local: true) do |form| %>     <%# modelオプションでscheduleと指定することでフォームの内容をscheduleモデルと結びつける %>
+    <% if schedule.errors.any? %>     <%# オブジェクトがエラーを持っているかどうかを確認し、エラーがあれば下の処理が行われる %>
+        <div id="error_explanation">
+        <h2><%= schedule.errors.count %> つのエラーにより、このスケジュールは保存されませんでした</h2>     <%# エラーの数を表示 %>
+        <ul>
+            <% schedule.errors.full_messages.each do |message| %>     <%# 該当するエラーメッセージを繰り返しで表示する %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+
+    <div>     <%# テキストでの入力フォーム %>
+        <%= form.label :title, 'タイトル' %>
+        <%= form.text_field :title %>
+    </div>
+
+    <div >     <%# form.date_fieldにて開始日の値を送信する %>
+        <%= form.label :start_date, '開始日' %>
+        <%= form.date_field :start_date  %>
+    </div>
+
+    <div>     <%# form.date_fieldにて終了日の値を送信する %>
+        <%= form.label :end_date, '終了日' %>
+        <%= form.date_field :end_date %>
+    </div>
+
+    <div>     <%# form.check_boxにて終日であるかの値を送信する %>
+        <%= form.label :all_day, '終日' %>
+        <%= form.check_box :all_day %>
+    </div>
+
+    <div>     <%# テキスト文を送信する %>
+        <%= form.label :memo, 'メモ' %>
+        <%= form.text_area :memo  %>
+    </div>
+
+    <div>     <%# フォームの内容を送信する %>
+        <%= form.submit 'スケジュールを更新' %>     <%# フォームのデータが指定されたアクションに送信される %>
+    </div>
+<% end %>
